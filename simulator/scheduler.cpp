@@ -28,7 +28,7 @@ int Scheduler() //return end time of current task or INT_MAX if nothing to be do
 		if(ArrivedTaskList[0].Deadline<ArrivedTaskList[0].RealExecutionTime+CurrentTime)
 		{
 			cout<<"[Sched] Discarded Task "<<ArrivedTaskList[0].ID
-			<<"due to deadline miss\n";
+				<<"due to deadline miss\n";
 			ArrivedTaskList.erase(ArrivedTaskList.begin());
 		}
 		else

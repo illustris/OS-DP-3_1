@@ -35,7 +35,7 @@ void ReadTasks(char* FileName)
 				TaskListFile>>TaskList[i].ExecutionTime[j];
 			}
 		TaskListFile>>TaskList[i].Criticality>>TaskList[i].RealCriticality
-										>>TaskList[i].Deadline;
+					>>TaskList[i].Deadline;
 		TaskList[i].RealExecutionTime=TaskList[i].ExecutionTime[TaskList[i].RealCriticality-1];
 		TaskList[i].ID=i;
 	}
@@ -139,7 +139,8 @@ int main(int argc, char** argv)
 {
 	if(argc != 2 && argc != 3)
 	{
-		cout<<"Usage: \n"<<argv[0]<<" joblist [duration]\n";
+		cout<<"Usage: \n"<<argv[0]<<" joblist\n";
+		return 0;
 	}
 	ReadTasks(argv[1]);
 	sort(TaskList.begin(),TaskList.end());
