@@ -7,6 +7,7 @@ struct job
 	int ID;
 	int ArrivalTime;
 	int ExecutionTime[4];
+	int Period;
 	int RealExecutionTime; //
 	int Criticality;
 	int RealCriticality; //
@@ -31,3 +32,4 @@ extern vector<job> TaskList;
 extern vector<job> ArrivedTaskList;
 
 extern job* CurrentJob;
+extern job AperiodicServer;

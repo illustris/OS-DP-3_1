@@ -20,6 +20,8 @@ vector<job> ArrivedTaskList;
 
 job* CurrentJob;
 
+job AperiodicServer;
+
 void ReadTasks(char* FileName)
 {
 	string buff;
@@ -35,9 +37,9 @@ void ReadTasks(char* FileName)
 				TaskListFile>>TaskList[i].ExecutionTime[j];
 			}
 		TaskListFile>>TaskList[i].Criticality>>TaskList[i].RealCriticality
-					>>TaskList[i].Deadline;
+					>>TaskList[i].Deadline>>TaskList[i].Period;
 		TaskList[i].RealExecutionTime=TaskList[i].ExecutionTime[TaskList[i].RealCriticality-1];
-		TaskList[i].ID=i;
+		TaskList[i].ID=i+1;
 	}
 }
 
@@ -46,12 +48,12 @@ void PrintTasks()
 	cout<<TaskList.size()<<" Tasks\n";
 	for(int i=0;i<TaskCount;i++)
 	{
-		cout<<"Task "<<i+1<<"\nArrival: "<<TaskList[i].ArrivalTime
+		cout<<"Task "<<TaskList[i].ID<<"\nArrival: "<<TaskList[i].ArrivalTime
 			<<"\nExecution times: ";
 		for(int j=0;j<4;j++)
 			cout<<TaskList[i].ExecutionTime[j]<<"\t";
 		cout<<"\nCriticality: "<<TaskList[i].Criticality<<"\nDeadline: "
-			<<TaskList[i].Deadline<<endl;
+			<<TaskList[i].Deadline<<"\nPeriod: "<<TaskList[i].Period<<endl;
 	}
 	cout<<"\n";
 }
@@ -75,6 +77,9 @@ void StartSim()
 {
 	int i=0;
 	int SchedEndTime;
+
+	AperiodicServer.RealExecutionTime = INT_MAX;
+
 	while(1)
 	{
 		CurrentTime=NextTime;
@@ -86,7 +91,7 @@ void StartSim()
 				if(TaskList[i].ArrivalTime==CurrentTime)
 				{
 					//add to ArrivedTaskList
-					cout<<"[SIM] Task "<<i<<" arrived at "<<CurrentTime<<"\n\n";
+					cout<<"[SIM] Task "<<TaskList[i].ID<<" arrived at "<<CurrentTime<<"\n\n";
 					ArrivedTaskList.push_back(TaskList[i]);
 				}
 				i++;
